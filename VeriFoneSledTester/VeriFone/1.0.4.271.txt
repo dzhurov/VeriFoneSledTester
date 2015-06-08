@@ -1,0 +1,990 @@
+1.0.4.271
+Fixes a behavior issue with response parsing in some scenarios
+
+1.0.4.270
++ Properties in VFISoftwareVersion class for OS Build Year,Month,Day
++ E14 and getKeyID commands - retrieved keyID is stored in VFICipheredData.keyID
++ Preliminary S67 command
++ Added 0 as an acceptable key index for E10
+	- Default key index for E10 changed from 1 to 0
++ Two new commands based on the S00 cancel command - some options are for e315 only, the new parameters require at least XPI 7
+	-(void) cancelCommandWithDisplayOptions:(int)display;
+ 	-(void) cancelCommandWithDisplayOptions:(int)display andEMVFallback:(int)fallbackFlag disableKeyboard:(BOOL)shouldDisableKeyBoard;
++ Added new OS commands
+	- G47 -> queryDiagnosticMode
+	- G48 -> displayMessage:withX:andY:shouldClearDisplay:
+	- G51 -> enableWatchdogTimer:withCountdownValue:
+	- G54 -> hostPowerEnabled_e335:
+	- G54 -> isHostPowerEnabled_e335
++ controlBatteryEvent Delegate and enableLowBatteryNotification: withNotificationLevel: command. Allows user to receive battery events from framework delegate instead of parsing them themselves.
++ Added extended S67 command that includes extra options
+- Removed extra outdict release from VFIConnect that was causing a crash
+- Deprecated the D11/createCAPKFile command, causing a warning to appear, telling user to use D11a/createCAPKFile command instead
+
+Fix for parsing G00 command to include these new properties if necessary
+Fix for parsing track data from S20 command (Now parses out cardholder, PAN, expiration from either track)
+Fix for parsing track data from S16 command (Now parses out cardholder, PAN, expiration from swipe data too) 
+Fix for overloaded C30 method, command now works correctly
+Fix for C30 parsing, Track1 will now parse correctly when swiped
+Fix for C30 Track1&2 parsing, removes the period that was showing up at the end of the tracks
+Fix for G00 not responding on first call
+Fix broken D19/updateExtendedEMVRecord...ctlsCountry:(NSString*)country ctlsCurrency:(NSString*)currency command
+Fix for C34 issue (double encoding of some tags)
+Fix documentation issue, describing XPI app as barcode app in Pinpad class
+Fix issue with S95 response parsing, full CTLS Firmware Version is now reported
+Fix pinpad issue where framework would return a framework timeout response even after receiving a good response
+Fix C25 to properly encode script data
+
+
+Clarified the G36 enableBatteryNotification command helptext
+Modified behavior of S20 response handling - S20 no longer returns a '99' - COMMAND NOT SUPPORTED response in pinpadResultCode delegate if the Cancel button is pressed on the gen3 pinpad.
+Fixed timeout issue where VMF would report a timeout after receiving a response in certain scenarios
+Resolves various crashes
+
+1.0.4.267
+Resolved issue with other Bluetooth devices  where connecting and disconnecting would cause the framework to behave unexpectedly.
+Also updates setCTLSLEDs command to allow control of all four LEDs on the Gen3 devices
+
+1.0.4.266
+Fixed issue with parsing in VFIControl methods
+
+1.0.4.265
+Fixed mixing code (error if block ended with MARKER character)
+
+1.0.4.264
+Adding several commands to VFIControl Class:
+-(void) rebootDevice
+-(void) getGen3DeviceInfo
+-(NSString*) getKSIVersion
+-(bool) setDeviceLogging:(bool)isEnabled
+-(int) queryDeviceLogging
+-(NSString*) getLogRecord
+-(NSString*) getCrashInfo
+-(bool) enableLowBatteryNotification:(bool)isEnabled
+-(NSString*) performMSRDiagnostic
+-(NSString*) performPINEntryDiagnostic
+-(bool) performKeypadAllKeyDiagnostic
+-(bool) performDisplayDiagnostic
+-(bool) startDiagnosticMode
+-(void) stopDiagnosticMode
+-(bool) setDateAndTime:(NSDate*)date
+-(NSString*) getFileHash:(NSString*)filePath
+-(bool) setContactlessLED:(bool)enableLED
+
+1.0.4.263
+Resolved blocking issue after receiving a U00 in response to a C30 command.
+
+1.0.4.262
+Adding the G25/getGen3DeviceInfo method to VFIControl Class
+Also adding VFIGen3DeviceInfo encapsulating class to store this data.
+Also added a missing log statement to getPowerStatus method
+
+1.0.4.261
+S21/DataRequest validates surcharge as positive entry.
+
+1.0.4.260
+Further refinements to softMode sendTrigger execution speeds and reliability.
+
+1.0.4.259
+Modified VFIPinpad to use unique CFRunLoops within wait loops.
+Fixed NASD 2025: Z50/requestStringInput: New set of response codes not implemented on newer builds
+Fixed NASD 2026: Z52/displayMessagePromptInput: copyStringResponse returns the response code
+
+1.0.4.258
+Removed abortScan from initDevice
+Remove all channel initialization on first channel initialization request
+Added small timing delay after pinging barcode for alive for synchronize requirements
+
+1.0.4.257
+Updated VFIBarcode to check for duplicate power cycling on some config commands.
+
+1.0.4.256
+Fixed new timeout errors in barcode app introduced in 1.0.4.255.
+
+1.0.4.255
+Fixed triggers presses always returning "LEFT PRESSED", even with Right and Both triggers were pressed.
+
+1.0.4.254
+Fixed barcode parsing in E3* series (broken in .252)
+Updated softMode for stability and responsiveness during rapid trigger presses.
+
+
+1.0.4.253
+Fixed pre-parsing of Gen3 barcode packets (incorrect parsing led to barcode scans unable to be read)
+Fixed softMode extended trigger reporting delay
+Enhanced VMF to pre-parse incoming barcode data and break apart dual byte stream into individual bytes streams before sending to barcodeSerialData:Incoming
+
+1.0.4.252
+Fixed NASD issue 2018:  tipAmount not set on S21Prompt. 
+Fixed NASD issue 2013: ignoreDuplicate not functioning as designed
+Fixed issue with VMF getting out of sync with scanner light on rapid trigger presses in softMode
+Fixed issue where combined response incorrectly being interpreted as "incomplete packet" and not processing
+
+1.0.4.251
+Fixed:  setScanTimeout powering down e315 scanner. 
+Changed:  Apple now using rfu1, rfu2 and rfu3 variables in their own private api's, conflicting with VFIEMVConfiguration.rfu* variables with the same name-  
+  VFIEMVConfiguration.rfu1 now renamed as VFIEMVConfiguration.vfi_rfu1
+  VFIEMVConfiguration.rfu2 now renamed as VFIEMVConfiguration.vfi_rfu2
+  VFIEMVConfiguration.rfu3 now renamed as VFIEMVConfiguration.vfi_rfu3
+
+
+1.0.4.250
+Fixed:  initDevice for a certain app on e255 executing all apps isInitialized notifications.  
+
+1.0.4.249
+Fixed NASD Issue 1997: configureBeep not executing on e210/e255
+
+1.0.4.248
+Fixed e255 serial number returning null during init in some cases.
+Updated closeDevice routines to address stability issues during interrupted init sequence
+
+1.0.4.247
+Fixed activation/deactivation of UPC1 (UPC_A/UPC_E), UPC2(EAN_8,EAN_13), MAXICODE and DATAMATRIX.
+
+1.0.4.246
+Fixed parsing of S16 to validate track data length.
+
+1.0.4.245
+Fixed NASD issue
+1936: S21/dataEntry - vfiDataEntry : Surcharge type returns 1 with 0.00 value
+
+1.0.4.244
+Changed EncryptionMode enumerations:
+	EncryptionMode_VSP=1,
+	EncryptionMode_PKI=2,
+	EncryptionMode_NOE=0,
+	EncryptionMode_VSD=5
+
+1.0.4.243
+Added additional method call for E06: -(int) getCipheredData;
+Renamed VFICipheredData.VSD_encryptedBlob to VFICipheredData.VSD_Blob
+
+
+1.0.4.242
+All following changes apply to VFIPinpad class-
+Added additional overloaded method to S16/obtainCardData for CVV, masking, and timeout:
+-(int) obtainCardData:(int)lcode displayIdle:(BOOL)display displayExpiry:(BOOL)expiry luhnCheck:(BOOL)luhn entryMode:(int)mode cvvPrompting:(int)cvvPrompt masking:(BOOL)enableMasking timeout:(int)timeout;
+
+Added additional EncryptionMode enumeration:
+EncryptionMode_VSD
+
+Added additional Ciphered blob to VFICipheredData to hold VSD blob from E06 inquiry:
+NSString* VSD_encryptedBlob;
+
+Modified parsing of E00 response to allow inclusion of EncryptionMode_VSD
+
+Modified parsing of E06 response to allow inclusion of EncryptionMode_VSD
+
+Modified parsing of E10 response to allow inclusion of DUKPT key index.
+
+Added property vsdKeyIndex to hold returned DUKPT key index in E10 response.
+
+Added additional overloaded method to E10/selectEncryptionMode to allow DUKPT key index;
+-(EncryptionMode) selectEncryptionMode:(EncryptionMode)mode keyIndex:(int)index;
+
+1.0.4.241
+Fixed NASD issue #1823: getXPIVersion returns the OS version
+
+1.0.4.240
+Delegates that monitor serial data (pinpadSerialData: incoming:) now report activity of init sequence.
+Added additional delegate to VFIPinpad class (btSerialData: incoming:) to monitor all data across bluetooth channel
+Fixed issue of sending isConnected:TRUE to delegate before setting internal connected flag to true
+Fixed issue of S95 depending on string value "VX600" as validation for correct response
+Addressed following NASD Issues:
+#1724: S20/S21/S23: parameter is float instead of double thus 999999.99 is converted to 1000000.0
+#1747: S20/obtrainTrack2Data respose code is 0 instead of 2 on timeout value greater than 63 seconds
+#1748: S20/obtainTrack2Data: Default timeout is approximately 60 seconds instead of 255
+#1749: S20/obtainTrack2Data: When timeout value is 0, default timeout is approximately 60 seconds instead of 255
+#1750: S11/displayMessage response is 0 in all cases: CANCEL, CORR, OK, TIMEOUT
+#1751: S12/generalPrompt/generalPromptDefault: max length value is displayed in VX600BT when second message is invalid
+#1752: S14/displayMessages: default time out not used when timeout = 0
+#1759: S21/dataEntryRequest: Vx600BT accepts and displays amount < 1 excluding 0
+#1760: S23/combinePromptCommand: Accepts negative numbers for transaction amount
+#1763: Z50/requestStringInput: Timeout value not recognized
+#1767: Z62/acceptEncryptPINMessage: Timeout is approximately 50 seconds instead of 5 minutes and response is 0
+#1781: S12/generalPrompt: Cancel operation returns 99
+#1782: S14/displayMessages without timeout parameter does not use the timeout default
+#1792: setTrigger: when set to setSoft/setPassive, barcode light does not turn on after executing activateTrigger
+#1793: XPI commands: Response code for CANCEL operation is 99 in most commands
+#1810: S16/obtainCardData: response code is -1 instead of 02 (timed out)
+#1811: S16/obtainCardData: Vx600BT goes to timeout while operation is active
+#1823: getXPIVersion returns the OS version
+#1824: C30/getCardData: Contactless light indicator lights up even if amount is equal to 0
+#1856: Z50:response code on No Response (Enter pressed) is 0 instead of 1
+#1857: Z50/requestStringInput: Timeout = 0 results to infinite timeout
+#1858: S21Prompt: Cancel operation returns 0 instead of 3
+#1862: Z50/displayMessagePromptInput: Timeou value bigger than 255 still gives a responce code of 2 (timeout)
+#1863: Z62/acceptEncryptPINMessage: Proceeds with operation despite having a 7-digit account number and response is 2 instead of -3
+#1879: Z52/displayMessagePrompt: response code on NULL (Enter pressed) is 1 instead of 3
+#1886: S21Prompt/dataEntryRequestPrompt: response code is 3 on timeout instead of 2
+
+
+
+
+1.0.4.235
+Resolved: endless loop condition when setting symbologies on e3xx
+Resolved: EA session not closing when non-background app terminates on e3xx
+Added:  isGen3 property to VFIPinpad
+
+1.0.4.234
+Further updating of connect/disconnect routines. Fixed openURL quick switching lock.
+
+1.0.4.233
+Updated framework to properly process EA disconnect while app is in background.
+
+1.0.4.232
+Updated disconnect routines.  Increased performance of connection routines.
+
+1.0.4.231
+Enhanced S95 init checking code.
+Fixed e100 sled delegate issue in VFIPayware class
+Fixed VMF internal flag resets on e315 reboots
+Added getPowerStatus command to Control class:
+
+G22 – Get Power Status
+Returns IAP Manager power status. 
+
+Usage:
+-(POWER_STATUS) getPowerStatus;
+
+Return Value
+typedef struct {
+    bool HOST_PWR;                //!<On Battery Power
+    bool EXT_PWR;                 //!<On External Power
+    bool POWERSHARE_ON;           //!<Power Share Currently Active
+    bool DATA_SYNC_EN;            //!<Data Sync is enabled
+    bool IDEVICE_PRESENT;         //!<iDevice is connected to terminal
+    bool GANG_CHARGER;            //!<terminal on gang charger
+}POWER_STATUS; 
+
+
+1.0.4.230
+Restored Zontalk binary update capabilities.
+Fixed S95 execution on e255 init sequence.
+Restored init speed when device channel is opened in ready state.
+Restored ReconnedStarted / ReconnectFinished delegates
+Fixed Initialized firing delegate
+
+
+1.0.4.229
+Updated External Accessory connection routines.
+
+
+1.0.4.228
+Resolved e315 quick trigger events in soft mode getting out of sync.  Updated G08 - getBatteryLevel to recognize new response format for XPI 7.0.
+
+
+1.0.4.227
+Updated to support barcode encryption
+Added to VFIBarcode:
+Property:
+@property (nonatomic, readonly) NSString *keyLoadErrorCode;
+
+Methods:
+-(int) loadKeyInformation_RSA:(NSString*)publicKeyRSA publicKeyID:(NSString*)keyID;
+-(int) E08_RSA:(NSString*)publicKeyRSA publicKeyID:(NSString*)keyID;
+-(int) loadKeyInformation_x509:(NSString*)publicKeyX509;
+-(int) E12:(int)type p75Data:(NSData*)data;
+-(int) loadPKISig:(int)type p75Data:(NSData*)data;
+-(int) E12:(int)type p75Data:(NSData*)data;
+-(int) enablePKI:(bool)enable;
+-(int) E10:(BOOL)enable;
+
+Protocol:
+- (void) barcodeScanData:(VFIEncryptedBarcode*)data;
+
+
+New Class Added to VMF:
+@interface VFIEncryptedBarcode : NSObject{
+    NSString *terminalSerialNumber;     //!< Terminal Serial Number
+    NSString *publicKey;                //!< Public Key ID
+    int scanIndex;                      //!< incremental barcode counter
+    int decryptedLength;                //!< Length of decrypted barcode data
+    NSMutableArray *encryptedData;       //!< Array of NSData containg Base64 encoded encrypted binary data.
+
+}
+
+
+
+1.0.4.224
+Added functions to clear sharedURLCache before and after HTTP transfers. 
+
+1.0.4.223
+Added HTTP requests for VCMF transactions:
+Cache-Control: no-cache
+Cache-Control: no-store
+Cache-Control: max-age=0
+
+
+1.0.4.222
+Fixed endless loop condition in deactivateBarcodeType and activateBarcodeType. (introduced in .209)
+
+1.0.4.221
+Fixed e210/e255 to accept barcode scans greater than 255 characters.
+
+1.0.4.220
+Fixed S20 obtainrack2Data to populate vfiCardData on non standard ISO cards returning a result code of 01
+
+1.04.219
+Fixed: Crash on zontalk update reboot, duplicate symbol compile errors
+New methods to support XPI 6.42 or greater:
+C52: -(int) pinManagementCardAuthorization:(float)amount otherAmount:(float)amtOther merchantDecision:(int)decision minRequestObjects:(NSMutableArray *)reqObjArray;
+C54: -(int) pinManagementCompleteOnlineEMV:(int)hostDecision displayResult:(BOOL)flag hostTags:(NSMutableDictionary*)hostTagData;
+D25: -(int) setAdditionalEVMFlags:(BOOL)visaDebitFlag ctlsMode:(int)mode pdolSupport:(BOOL)pdolFlag valueLinkCtls:(BOOL)valuLinkFlag amexMode:(int)amexMode;
+Z58: -(int) amountIntroduction:(int)defaultValue amountFormat:(int)format message1:(NSString*)msg1 message2:(NSString*)msg2;
+C30: -(int) getCardData:(int)timeout language:(int)lcode amount:(float)txnAmt otherAmount:(float)txnOthAmt isRefundCTLS:(BOOL)isRefund disableCTLS:(BOOL)disableCTLS;
+D19: -(int) ctlsCVMLimit:(float)ctlsCVM ctlsTranLimit:(float)ctlsTran ctlsTacDefault:(NSData *)tacDefault ctlsTacDenial:(NSData *)tacDenial ctlsTacOnline:(NSData *)tacOnline visaTTQ:(NSData *)ttq termCapabilities:(NSString*)termCapb addTermCapabilities:(NSString*)addTermCapb ctlsCountry:(NSString*)country ctlsCurrency:(NSString*)currency;
+D26: -(int) updatePassThru:(int)recordNum aid:(NSString*)aid version:(NSString*)version;
+D30: -(int) setC30CustomPrompts:(NSString*)line1 line2:(NSString*)line2 line3:(NSString*)line3 line4:(NSString*)line4 amt1:(BOOL)amt1 amt2:(BOOL)amt2 amt3:(BOOL)amt3 amt4:(BOOL)amt4;
+D30: -(int) setC30DefaultPrompts;
+S16: -(int) obtainCardData:(int)lcode displayIdle:(BOOL)display displayExpiry:(BOOL)expiry luhnCheck:(BOOL)luhn entryMode:(BOOL)mode
+S95: -(int) diagnosticInfoExtended;
+S97: -(int) requestEMAFiles;
+D01: -(int) pinBypass:(BOOL)bypass;
+E20: -(int) derivedKey:(int)command;
+G09: -(BOOL) isHostPowerEnabled;
+-(void) disableKeypadOnUSBPower:(BOOL)isDisabled
+-(NSString*) getKeypadState
+-(NSString*) getBTFirmwareVersion{
+-(NSString*) getBTFriendlyName{
+-(NSString*) getBTPIN{
+-(BOOL) getBTSPPEnable{
+
+
+1.0.4.218
+Fixed e315 to accept barcode scans greater than 256 characters.
+
+1.0.4.217
+Fixed e315 cancelPendingCommand, force quit session notification.
+
+1.0.4.216
+Fixed ExternalAccessory open/close session issues.
+
+1.0.4.215
+Fixed S23 timeout to recognize value of promptTimeout instead of frameworkTimeout.
+
+1.0.4.214
+Fixed executing cancelPendingCommand after non-blocking methods.
+
+1.0.4.213
+Removed "setSoft" mode reset after openDevice.
+
+1.0.4.212
+Fixed softMode/backwards compatibility with e315. Resets "setSoft" mode after openDevice to re-enable trigger events after closeDevice on e315.
+
+1.0.4.211
+Fixed parsing crash on S16 manual card entry.
+Restore start/end sentinels on s16track1/s16track2 data.
+
+1.0.4.210
+Added two additional fields to VFICardData to support S16 card parsing:
+ - VFICardData:s16track1
+ - VFICardData:s16track2
+
+Fixed S23 parsing correctly into VFIDataEntry fields.
+
+Added following methods for e315 barcode support:
+ - mDeviceOpen (VFIBarcode)
+ - mDeviceClose (VFIBarcode)
+ - mStartScan (VFIBarcode)
+ - mStopScan (VFIBarcode)
+ - mTriggerMode: (VFIBarcode)
+ - mBeepImmediate: (VFIBarcode)
+ - mAppVersion (VFIBarcode)
+ - mFirmwareVersion (VFIBarcode);
+ - mAutoBeepConfig: (VFIBarcode);
+ - mAutoBeepConfig:scanBeep:errorBeep: (VFIBarcode)
+ - mButtonStatus (VFIBarcode)
+ - mRestoreDefaults (VFIBarcode)
+ - mPicklistMode: (VFIBarcode)
+ - mScanTimeout: (VFIBarcode)
+ - mDifferentSymbolDecodesTimeout: (VFIBarcode)
+ - mContinuousMode: (VFIBarcode)
+ - mUniqueCodeReport: (VFIBarcode)
+ - mElectronicDisplayRead: (VFIBarcode)
+ - mGetAutoBeepMode (VFIBarcode)
+ - mGetAutoBeepScan (VFIBarcode)
+ - mGetAutoBeepError (VFIBarcode)
+ - mScanDataPrefix:value: (VFIBarcode)
+ - mScanDataSuffix1:value: (VFIBarcode)
+ - mScanDataSuffix2:value: (VFIBarcode)
+ - mScanDataTransmitFormat: (VFIBarcode)
+ - mAimPattern: (VFIBarcode)
+ - mSymbology:value: (VFIBarcode)
+ - mSymbology:value: (VFIBarcode)
+ - mDisableAllSymbologies (VFIBarcode)
+
+
+
+1.0.4.209
+Added support for e315 (new barcode hardware)
+
+1.0.3.208
+Added another create CAPK method (D11) to accept NSString for index.
+New methods createCAPKFile, D11a:
+-(int) createCAPKFile:(NSString *)RID pkIndex:(NSString*)index modulus:(NSData *)modulus exponent:(NSData *)exp checksum:(NSData *)csum expiryDate:(NSDate *)date;
+-(int) D11a:(NSString *)RID pkIndex:(NSString*)index modulus:(NSData *)modulus exponent:(NSData *)exp checksum:(NSData *)csum expiryDate:(NSDate *)date;
+
+1.0.3.207
+Fixed Gen2.0 startup shutdown failure if delayed startup.
+
+1.0.3.206
+Fixed Gen2.5 startup shutdown failure if delayed startup - part 2.
+
+1.0.3.205
+Fixed Gen2.5 startup shutdown failure if delayed startup.
+
+1.0.3.204
+Fixed Gen2.5 startup failure if logging was enabled.
+
+1.0.3.203
+Respond to mixing app error code of application not open by request app to reopen.
+
+1.0.3.202
+Resolved delayed boot issue: Gen2.5 with non-blocking cases.
+
+1.0.3.201
+Hot reboot optimization after software update and mid-app restart.
+
+1.0.3.200
+Fixed hot reboot on e210 (30-pin Vx600) after software update.
+Fixed automatic re-enable of auto shutoff after Zontalk update.  If auto shutoff is disabled before zontalk update takes place, VMF won't re-enable auto shutoff after update is finished.
+
+
+1.0.3.199
+Fixed hot reboot on BlueTooth Vx600 after software update.
+Fixed issue of ExternalAccessory locking up on Bluetooth reboot.
+
+1.0.3.198
+Fixed cancel button press to fire delegate pinpadSerialData:incoming.
+Fixed cancel button press to fire delegate pinpadResponseCode.
+Fixed timeout to fire delegate pinpadResponseCode.
+
+1.0.3.197
+Updated Motorola barcode routines.
+
+1.0.3.196
+Fixed Barcode recognition when greater than 255 characters.
+
+1.0.3.195
+Further support for Motorola barcode scanner.  Added new delegate method for barcode scanner additional data:
+
+- (void) barcodeScanData:(NSData*)data CodeID:(int)codeID SymbologyID:(int)symbologyID AIM_id:(int)aimID;
+
+1.0.3.194
+Fixed D13 Command.
+Fixed D14 Command.
+Modified VFIEMVConfiguration elements for proper variable types
+
+1.0.3.193
+Fixed Barcode segmented response issues.
+
+1.0.3.191
+Fixed Barcode <ACK> <NAK> Issues
+Fixed scannerFirmware issue.
+
+1.0.3.189
+Starting on 01MAY13, Apple is rejecting any apps using uniqueIdentifier. VFIConnect was using uniqueIdentifier for device registration.  It has been removed and now up to the integrator to pass the serial number when registering device.  In iOS 6, the device unique identifier can be generated by:
+  [[[UIDevice currentDevice] identifierForVendor] UUIDString]
+
+Another method to generate a unique UDID for all iOS versions is as follows.  Note, the value returned will be unique every time it is called (unlike identifierForVendor which will not change on a particular device, but be unique to other devices):
+
+- (NSString *)createNewUUID {
+    
+    CFUUIDRef theUUID = CFUUIDCreate(NULL);
+    CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+    CFRelease(theUUID);
+    return [(NSString *)string autorelease];
+}
+
+The following methods have been MODIFIED to now require a serial number to be passed:
+-(NSString*) registerAccount:(NSString*)clientID userID:(NSString*)userID password:(NSString*)password serialNumber:(NSString*)serialNumber gateway:(HostAddress)addr customIP:(NSString*)customIP;
+
+-(NSString*) registerAccountMultiUser:(NSString*)clientID userID:(NSString*)userID password:(NSString*)password serialNumber:(NSString*)serialNumber gateway:(HostAddress)addr customIP:(NSString*)customIP;
+
+-(NSString*) registerAccount:(NSString*)clientID userID:(NSString*)userID password:(NSString*)password serialNumber:(NSString*)serialNumber gateway:(HostAddress)addr customIP:(NSString*)customIP platform:(NSString*)type;
+
+-(NSString*) registerAccountMultiUser:(NSString*)clientID userID:(NSString*)userID password:(NSString*)password serialNumber:(NSString*)serialNumber gateway:(HostAddress)addr customIP:(NSString*)customIP platform:(NSString*)type;
+
+The following method has been ADDED to retrieve the serial number from the stored credentials:
+-(NSString*) getSerialNumber:(NSString*)credentials;
+
+
+
+1.0.3.188
+Added support for Gen3 disconnect/reconnect.
+
+1.0.3.187
+Fixed non-blocking to determine if Vx600 is connected before attempting to sending command.
+Added new framework error result code if command is sent without Vx600 connected: VFIResultCode_Device_Not_Available = -5
+CancelPendingCommand (S00) fixed to await for <ACK> in all cases
+VMF will <ACK> '99' response in all cases
+
+
+1.0.3.186
+Evaluate data for unsolicited swipe and force mixing channel to pinpad for proper processing.
+
+1.0.3.185
+Fixed D25 XPI command.
+
+1.0.3.184
+Added support for next-generation Vx600 with the following protocol strings:
+com.verifone.pmr.barcode
+com.verifone.pmr.control
+com.verifone.pmr.xpi
+com.verifone.pmr.zontalk
+com.verifone.pmr.debug
+
+1.0.3.183
+Restored missing selector for EA Connector-Gen2 that was causing crash in .182.
+
+1.0.3.182
+Added TCP/IP Server within VFIPinpad class.  
+Additional methods added:
+-(void) initServerOnPort:(int)port;
+-(void) startServer;
+-(void) stopServer;
+Additional Property Added:
+@property (readonly) BOOL serverRunning;
+Additional optional protocols added:
+- (void) pinpadServerData:(NSData*)data  incoming:(BOOL)isIncoming;
+- (void) serverConnected:(BOOL)isConnected;
+
+1.0.3.181
+Fixed cancelPendingCommand/cancelCommand to wait for <ACK> before proceeding.  Without waiting for <ACK>, the next XPI command sent would receive <NAK>
+
+1.0.3.180
+Added ability for VMF to stay connect to application while in background.
+Two methods added to VFIBTBridge:
++(void) setNoDisconnect:(BOOL)val;
++(BOOL) noDisconnect;
+To keep Vx600 connected while in background:
+1.  Set noDisconnect to TRUE BEFORE you attempt to initialize any VMF classes (VFIPinpad, VFIBarcode, etc):
+ [VFIBTBridge setNoDisconnect:TRUE];
+2.  Configure the background modes in the .plist to enable continuous connection while in background:
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>external-accessory</string>
+		<string>bluetooth-central</string>
+		<string>bluetooth-peripheral</string>
+	</array>
+
+1.0.3.179
+Fixed trimData methods to not allow negative length being passed. Validated barcode data is now at least 12 bytes before processing.
+
+1.0.3.178
+Modified VMF to immediately cease all queued communication with Vx600 on background action and close down external accessory session from first launch.
+
+
+1.0.3.177
+Modified VMF to immediately cease all queued communication with Vx600 on background action and close down external accessory session (excluding first launch).
+
+1.0.3.176
+Fixed issue with VFIConnect memory deallocation if registered twice in a row.
+Fixed issue with Vx600 leaving EAConnection open if application is backgrounded in the middle of init code.
+
+1.0.3.175
+Update ExternalAccessory NSRecursiveLock error bug fix to only apply to iOS 6.0x,and not iOS 6.x.  Apple fixed the but with iOS6.1, so the fix only needs to be applied to iOS 6.0x.  Info of the bug can be found here:
+http://stackoverflow.com/questions/12456922/eaacessory-errors-while-closing-session-with-ios-6-0-gm
+
+1.0.3.174
+VFI_Reachability:  Fixed incompatibility issue with VFI_Reachability class that caused registering to production gateway in VFIConnect to crash.
+
+1.0.3.173
+VFIAudioMSR:  Added release/retain to EraseCard/SwipeCard variables.
+
+1.0.3.172
+VFIConnect:  fixed initWithErrorXML unrecognized selector.  Fixed submitXML parsing of multi-clientID accounts.
+
+1.0.3.171
+Modified VFIConnect:submitXML to exclude exclude PWMR_SERIAL, GPS_LAT, and GPS_LONG when FUNCTION_TYPE = REPORT.
+
+1.0.3.170
+Fixed VFIPrinter battery checking routines.
+
+1.0.3.168
+Fixed VFIPrinter graphics printing routines.
+
+1.0.3.166
+Fixed BTBridge to properly re-init Vx600BT on device shutdown/reboot while in background.
+
+
+1.0.3.163
+Defined flags for uniMag drivers loaded in VFIConnect for proper deallocation of VFIAudioMSR class on release of VFIConnect instance.  Restored SAR swipe card processing to use field separators for track start.
+
+1.0.3.162
+Fixed VFIPinpad initialization hang when using BT Vx600.
+Modified SAR swipe card parsing to recognize track data if no field separators are available in stream to designate track data start.
+
+1.0.3.161
+Fixed dealloc issue with VFIAudioMSR/VFIConnect.
+Added method to poll for installed scanner firmware to VFIBarcode class.  Also added property that gets populated that can retrieve value in cases where blocking is disabled:
+-(NSString* )scannerFirmwareVersion
+@property (nonatomic, readonly) NSString *firmware
+
+1.0.3.160
+Turn off location services in VFIConnect when -close or -dealloc of class instance. Fixed deallocation issues with VFIConnect. Fixed StringEncryption class VFIConnect.
+Added enableBlocking/disableBlocking to VFIControl Class:
+-(void) enableBlocking;
+-(void) disableBlocking;
+Added protocol methods for receiving Battery Level, Keypad Version, Software Version
+- (void) controlBatteryLevel:(int)batteryLevel;
+- (void) controlSoftwareVersion:(VFISoftwareVersion*)softwareVersion;
+- (void) controlKeypadVersion:(VFIKeypadVersion*)keypadVersion;
+Made VFIConnect ARC Compatible, converting swipeCard and decryptedCredentials from structure to class.
+
+1.0.3.157
+Resolved session open errors caused by loading bluetooth drivers before iOS applicationDidBecomeActive notification.
+
+1.0.3.156
+Fixed waiting for <ACK> when blocking is OFF.
+
+1.0.3.155
+Implemented scanner power cycling before executing sendISCP or setTrigger to address existing hardware requirement.
+
+1.0.3.154
+Corrected VFIBarcode to properly recognize <NAK> on redundant ISCP commands to address out of range error.
+
+1.0.3.153
+Renamed Reachability.h routines to resolve conflict with i386 simulator build.
+
+1.0.3.152
+Added additional enumeration to VFIBarcode to detect both trigger press in soft mode:
++++++++++++++++++++++++
+/** BCS Application Trigger Responses **/
+enum  triggerResponse{
+    BCS_TRIGGER_RELEASED = 0,       //!< Trigger Released
+    BCS_TRIGGER_LEFT_PRESSED,       //!< Left Trigger Pressed
+    BCS_TRIGGER_RIGHT_PRESSED,       //!< Right Trigger Pressed
+    BCS_TRIGGER_BOTH_PRESSED       //!< Both Triggers Pressed
+} ;
++++++++++++++++++++++++
+Added power cycling to properly execute ISCP commands if VFIBarcode class is initialized with barcode power previously ON.
+
+
+1.0.3.151
+VFIPrinter class modified to properly handle iOS 6.0 reconnect.
+
+1.0.3.150
+VFIPrinter class modified to properly handle disconnects in openURL instances.
+
+1.0.3.148
+Resolved conflict with running both BTPrinter and Vx600 Agnostic at same time.
+
+1.0.3.147
+Modified VFIPrinter class for background/foreground disconnect/connect.
+
+1.0.3.146
+Enabled non-blocking of initDevice for pinPad, barcode.  Added enableBlocking/disableBlocking methods for VFIBarcode.
+
+1.0.3.145
+Addressed bug with ExternalAccessory/iOS6 _NSLockError that caused VMF to crash on Vx600 booting.
+
+1.0.3.144
+Misc. fixes for app-to-app stability and starting Vx600 after iOS application launches.
+
+1.0.3.143
+Fixed Gen2.0/Gen2.5 disconnect/reconnect issue when starting app with device off.  Restored blocking when LRC fails to await new packet in response to <NAK>. Fixed S01. Fixed S21. Fixed S23. Fixed file transfers to Vx600. Fixed "77" barcode bluetooth issue. Added delay to reconnect routine and also a validation to stay connected on quick re-start.
+
+1.0.3.142
+Fixed Gen2.0 crash on late startup. Fixed Z52 returning error code 99 incorrectly.
+
+1.0.3.141
+Updated VMF to be compatible with new Bluetooth quick-disconnect firmware.  Fixed zontalk transfer routines for bluetooth. Fixed setBeepOn/BeepOnParsedScan.  Fixed clearing response code when executing new command. Fixed S11 not returning full response code. Fixed memory leaks.  Fixed encoding TLV.
+
+1.0.3.140
+Resolved issue with BT Control class immediately returning disconnected to controlConnected delegate upon executing initDevice. Resolved control class not waiting for <ACK> after first command.  Resolved excludeBarcodeType not working.
+
+1.0.3.139
+Added additional Bluetooth Parsing.  Fixed issue with broken up response including <ACK> and the proper parsing of that response.
+
+1.0.3.138
+Fixed setEMVTags to properly parse dictionary.  Issue: passing dictionary with key "9F" and object "0702" was not passing 0x0702 to pinpad, but instead '0702' = 0x30373032.  
+Fixed C36 response. Issue: in some cases, if returned TLV was > 128 bytes but less than 256 bytes, it wouldn't properly parse tags into dictionary, instead just return one large tag "81".  
+
+1.0.3.137
+Added support for SAR FW 2.0 - Manchester Encoding. 
+
+1.0.3.136
+Modified BTBridge to stabilize response to BT Vx600 on connect/disconnect and to optimize reconnect time.  Removed prepareOpenURL for BTBridge (that requirement no longer necessary after 1.0.3.134) 
+
+1.0.3.135
+Moved reconnect from background onto a performSelectorOnMainThread call to improve UI performance.
+
+1.0.3.134
+Changed disconnect évent monitoring from UIApplicationDidEnterBackgroundNotification to UIApplicationWillResignActiveNotification
+
+1.0.3.133
+Removed .txt1 == .txt2 comparison and replaced with [.txt1 isEqualToString:.txt2].  iOS 6 does not properly compare string using ==
+
+1.0.3.132
+Added support for armv7s to VMF
+
+1.0.3.131
+Fixed E12 to properly send ASCII type to Vx600 instead of Binary type.
+Added iPhone5 support to VFIaudioMSR
+
+1.0.3.130
+Added keep alive checking routine for bluetooth connection to overcome the lag in External Accessory reporting disconnected event from power off or out of range.
+Added routine to valid Bluetooth device is connected on routine in addition to External Accessory array checking.  In some cases, External Accessory array will still contain the device as connected because of the lag in reporting the disconnect.
+
+
+
+1.0.3.129
+Fixed reconnect from background issue while using Gen2: in some cases it would execute Gen2.5 reconnection method causing unstability/crash.
+
+1.0.3.128
+Fixed bluetooth reconnection crash if VMF was initialized by bluetooth device was OFF. Fixed bluetooth reconnection issue when bluetooth device returns from background/sleep.
+Add the following method to VFIPinPad, VFIBarcode, VFIControl, and VFIBTBridge to specify the number of initialization loop attempts before failing.  The initialization loops execute every .05 sec and defaults to 59 attempts (approx 30 seconds before failure)
+-(void) setInitLoop:(int) loop;
+This method should be called after init but before initDevice is called on any of the respective classes.
+Supressed "Log Cleared" from writing to log if logging was turned off.
+
+
+1.0.3.127
+Changed Lumberjack logging class name to not conflict with integrators use of Lumberjack classes in their own project (symbol conflict).  
+
+1.0.3.126
+Removed extra logging.  Removed test data.
+
+1.0.3.125
+Added XPI 6.2 support.
+
+1.0.2.120
+Fixed barcode and control logging functions. Prior logging functions suffered performance degradation as log file grew.
+
+1.0.2.119
+Fixed CancelPendingCommand.  Added redundant code to break out of waiting to initialize loop.
+
+1.0.2.118
+Fixed accessory reporting (manufacturer, serial number, etc) for Gen 2.5.  Added thread to fully execute shutdown sequence on backgrounding of application. 
+
+1.0.2.117
+Removed abortScan/StartScan/getVersion from barcode init routines. 
+
+1.0.2.116
+Removed abortScan from barcode disconnect routines. The iOS doesn't allow enough time to fully execute abortScan before sending app to background.
+
+1.0.2.115
+Fixed C36 - getEMVTags - to properly parse response into EMVTag dictionary.
+
+1.0.2.114
+Fixed unsolicited swipe (broken in 112/113). Added routines to identify any segmented data begin returned by Vx600 before processing.  Fixed retain issue that was crashing getCardData (C30).
+
+1.0.2.113
+Added abortScan/startScan to sendISCP command.  Some ISCP commands will not process unless it is the first command sent after a startScan,.
+
+1.0.2.112
+Checks for unsolicited swipe data breaking up into multiple responses and combines them together.
+
+1.0.2.111
+Added the following method to VFIBTBridge class:
++(void) prepareOpenURL;
+With this method, it will not properly manage the init/disconnect of Vx600 when using openURL command.  Usage- right before you call openURL, call prepareOpenURL
+    [VFIBTBridge prepareOpenURL];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"verifone://data/moredata"]];
+
+
+1.0.2.109
+Fixed blocking of PKI command to wait for large block of data to finish receiving.
+
+1.0.2.108
+Removed 400ms delay to end of enableMSR/disableMSR (a fix was introduced into later versions of XPI).
+
+1.0.2.107
+Fixed cancelCommand/cancelPendingCommand to wait for ACK before resending.  Added 400ms delay to end of enableMSR/disableMSR to allow required XPI execution timing.
+
+1.0.2.106
+Changed data structures (vfiCardData, etc.) to be accessed as a shared structure.
+
+1.0.2.105
+Validated combining large incoming streams for PKI response.
+
+1.0.2.104
+Added AbortScan to Gen2.5 background routine.
+Fixed blocking issue after calling cancelCommand
+
+1.0.2.103
+Added startScan to barcode init routine
+
+1.0.2.102
+Restored Gen2.5 (Bluetooth) support.
+Fixed localized string to be a maximum of 16 characters.
+Modified vfiCardData.isCTLS to no autorelease value
+
+1.0.2.101
+Optomized barcode trigger events/soft mode.  Fixed issue with PinPad initialization where it was proceeding before receiving ACK from Gen2
+
+1.0.2.99
+Barcode Enhancements. StartScan/AbortScan better managed by framework.
+
+1.0.2.97
+Synchronized VMF routines. Removed possible code loop in barcode.
+
+1.0.2.96
+Removed Vx600.h and DeviceConfigurtation.h
+
+1.0.2.95
+Additional stability fixes.
+
+1.0.2.91
+Removed startScan from setTrigger in barcode method.
+
+1.0.2.90
+Removed abortScan from setTrigger in barcode method.
+
+1.0.2.89
+Added optional delegate methods to indicate start/end of initDevice:
+- (void) pinpadReconnectStarted;
+- (void) pinpadReconnectFinished;
+- (void) controlReconnectStarted;
+- (void) controlReconnectFinished;
+- (void) barcodeReconnectStarted;
+- (void) barcodeReconnectFinished;
+
+1.0.2.87
+Removed ConnectVx600/DisconnectVx600 requirement. Optomized connect/disconnect routines.
+
+1.0.2.86
+Fixed issue with LRC checking to validate data length before processing.
+
+1.0.2.85
+Added Vx600 class.
+
+1.0.2.84
+Added class level framework polling to VFIPinpad  [VFIPinpad VMF_Version]:
+ +(NSString*) VMF_Version;  
+Additional fixes to disconnect/reconnect routines
+
+1.0.2.83
+Monitors disconnects during initialization and exits if condition met.  Re-init routines code fixes.
+
+1.0.2.82
+Fixed non-response XPI commands to wait for ACK
+
+1.0.2.80
+Added support for setting -objC flag in Xcode.  By setting that flag, the project must include all the dependent frameworks for all of the classes VMF uses, regardless if the project uses those classes.  The list of required frameworks for using -objC flag are:
+ExternalAccessory
+CoreGraphics
+UIKit
+Foundation
+VMF
+CoreLocation
+AudioToolbox
+AVFoundation
+MediaPlayer
+SystemConfiguration
+libz.1.2.5.dylib  (or libz.1.2.3.dylib)
+
+1.0.2.79
+Rolled back Core EA driver changes of 1.0.2.78.  Added boot speed optimization. 
+
+1.0.2.78
+VFIAudio: now initializes the SAR audio data on init (to speed up tone creation on older iOS devices).
+General ExternalAccessory connection optimizations.  Fixed Barcode to exit from endless loop on bad init.
+
+1.0.2.76
+Removed CheckForAlive from Barcode and Control classes.  That routine pinged the barcode/control classes on init for response.
+
+1.0.2.75
+VFIZontalk: fixed issue of rejecting binary files with dash in file name.
+
+1.0.2.74
+VFIAudioClass:  Fixed issue were framework reported bad card read with SAR if SAR was already powered when card swipe requested.  Added checking for KSN = 0000000000 to report back bad swipe.
+
+1.0.2.72
+Added methods to check for channel responsiveness for Barcode and Control (already existed for PinPad).  If a channel is non-responsive, it will attempt to reset the channel and re-attempt connection. 
+
+1.0.2.71
+VFIAudioMSR:  Addressed bug where inserting and then quickly removing SAR during wake-up packet parsing would leave the power checking meters running and a new swipe request.  It now verifies that a devices is plugged in before it allows meters to continue to run after wake up packet parsing.
+
+1.0.2.70
+VFIAudioMSR: Additional fixes to SAR detection routines.
+VX600 closeDevice routines: updated to close session properly.
+
+1.0.2.69
+Vx600: fixed issue where loop checking for XPI was not being exited on EADisconnectNotification.
+Modified initialization notification to happen before connect notification (to address cases where integrators were notified of connection and then used that to check if initialized)
+VFIConnect:  Added new notification: AccMessage_KeepAliveDetected.  Used to broadcast when VFIAudioClass receives a keep alive packet.
+
+1.0.2.67
+VFIBTBridge:  Added disableBTBridge.  With this call, VX600BT will not be used.
+
+1.0.2.66
+VFIAudioClass: Fixed iJack looping when start/stop reader executing too quickly.  Fixed uniMag not being recognized on second card insertion.
+
+1.0.2.65
+VFIAudioMSR:  Additional logging messages for connect/disconnect notifications.
+
+1.0.2.64
+VFIConnect:  Added additional overloaded methods to registerAccount and registerAccountMultiUser.  New methods allow to pass SDK platform definition (Device Type) to override the built in platform definition (IPHONE).
+
+1.0.2.63
+Fixed: Vx600 Sled not properly responding to EADisconnect (powering off) notifications
+Added: new method in PinPad class
+-(void) setKSN20Char:(BOOL)is20Char;
+Setting value to TRUE will return all VFIEncryptionData.serialNumber results as 20 characters, prefixing "F" on values returned by Vx600 that is less than 20 characters.  Example, if KSN returned by VX600 is 1234567890123456, the framework will return FFFF1234567890123456.
+
+1.0.2.62
+VFIAudio Class:
+added -(id)initWithLogging:(BOOL)logging useSAR:(BOOL)SAR useIDT:(BOOL)IDT;
+Allows to selectively initialize SAR and/or IDTech
+Fixed issue with IDT power up looping when not detected.  Now attempts a maximum of 3 tries before issues disconnect notice
+Added notification when swipe is cancelled
+Added -(void) setSwipeRepeatOn;  allows for continuous swipe detection until swipe is captured OR cancel swipe is performed. For SAR only.
+VFIConnectClass:
+Added additional AccMessage:  AccMessage_SwipeCancelled.  Posted when a swipe has been cancelled and VCMF is ready to accept additional reader commands
+Added new enumeration-VFIDevices:
+	VFIDevices_SecureAudioReader = 1,
+	VFIDevices_VX600 = 2,
+	VFIDevices_Sleeve = 4,
+	VFIDevices_IDT = 8
+Added new init methods
+-(id) initWithDelegate:(id)del devices:(VFIDevices)deviceFlags;
+-(id) initWithLogging:(id)del debugLogging:(BOOL)turnON toFile:(BOOL)logToDocFolder toTTY:(BOOL)logToXCodeTTY toConsole:(BOOL)logToConsoleApp devices:(VFIDevices)deviceFlags;
+In both new methods, you pass VFIDevices to support using. For instance, if you want to only support SAR (1) and IDT(8), you would pass 9 as device flag.  Optionally, you may pass VFIDevices name separated by bar (OR).  Example: (VFIDevices_SecureAudioReader | VFIDevices_IDT)
+Added new swipe request method: -(void) requestSwipeRepeating - This is only valid for SAR and will keep the SAR in an endless swipe detection loop until swipe data is detected OR a cancel swipe is performed.
+
+
+1.0.2.61
+VFIAudio Class: Fixed cancelSwipe to reset flags for new swipe.
+
+1.0.2.60
+Added cancelPendingCommand to pin pad class.  This method is for canceling an command that is currently executing on Vx600 (during non-blocking situations)
+
+1.0.2.59
+Added frameworkVersion method to all classes.
+
+1.0.2.58
+Reset muxing application on Gen2.5(Bluetooth) reconnects.
+
+1.0.2.57
+Fixed wake from sleep with Gen2.5(Bluetooth).
+
+1.0.2.56
+Modifications to accommodate connect/disconnect instances when openURL is executed by calling app.
+
+1.0.2.54
+VFIAudioClass:  Added auto re-swipe after wake-up only packet.
+
+1.0.2.53
+Added Gen2.5 connect/disconnect support.
+Fixed issue where executing cancel didn't immediately cancel pending command on Vx600
+Added new methods to enable/disable blocking on pin pad commands
+Added new delegate protocol to receive response code from pin pad class
+Added new functionality to ConnectVX600 and DisconnectVX600 notifications to target specific instances of the class
+
+1.0.2.51
+VFIAudioClass: Reduced keep alive interval from 30 seconds to 27 seconds to not conflict with the hardware timeout of iJack.  Added notification for keep alive packet received so swipe can be reset/requested.
+
+1.0.2.50
+VFIAudioClass: Modified power meter timers to terminate upon detection of initial data
+
+1.0.2.49
+VFIBridge: restored bridge class to successfully interface with VFIPinPad, VFIBarCode, VFIControl and VFIZonTalk when bluetooth connection is detected.
+Added redundancy checking for diagnostic info [S95] for correct pinPad identification
+
+1.0.2.47
+Redesigned base ExternalAccessory drivers for more robust connectivity and dependable recovery from device reboot
+VFIAudioClass: Addressed deallocation error with NSTimerClass
+VFIConnect:  Addressed timers terminating pre-maturely

@@ -1,0 +1,478 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7EB41AA81B25A70700516BAF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB41AA71B25A70700516BAF /* main.m */; };
+		7EB41AAB1B25A70700516BAF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB41AAA1B25A70700516BAF /* AppDelegate.m */; };
+		7EB41AAE1B25A70700516BAF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB41AAD1B25A70700516BAF /* ViewController.m */; };
+		7EB41AB11B25A70700516BAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EB41AAF1B25A70700516BAF /* Main.storyboard */; };
+		7EB41AB31B25A70700516BAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EB41AB21B25A70700516BAF /* Images.xcassets */; };
+		7EB41AB61B25A70700516BAF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB41AB41B25A70700516BAF /* LaunchScreen.xib */; };
+		7EB41AC21B25A70700516BAF /* VeriFoneSledTesterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB41AC11B25A70700516BAF /* VeriFoneSledTesterTests.m */; };
+		7EB41ACE1B25BC4800516BAF /* 1.0.4.271.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EB41ACC1B25BC4800516BAF /* 1.0.4.271.txt */; };
+		7EB41ACF1B25BC4800516BAF /* VMF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB41ACD1B25BC4800516BAF /* VMF.framework */; };
+		7EB41AD11B25C62800516BAF /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB41AD01B25C62800516BAF /* CoreBluetooth.framework */; };
+		7EB41AD31B25C63F00516BAF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB41AD21B25C63F00516BAF /* Security.framework */; };
+		7EB41AD51B25C6B100516BAF /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB41AD41B25C6B100516BAF /* libz.1.2.5.dylib */; };
+		7EB41AD71B25C82300516BAF /* engagetst.tmw.com in Resources */ = {isa = PBXBuildFile; fileRef = 7EB41AD61B25C82300516BAF /* engagetst.tmw.com */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7EB41ABC1B25A70700516BAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7EB41A9A1B25A70700516BAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EB41AA11B25A70700516BAF;
+			remoteInfo = VeriFoneSledTester;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7EB41AA21B25A70700516BAF /* VeriFoneSledTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeriFoneSledTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EB41AA61B25A70700516BAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EB41AA71B25A70700516BAF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7EB41AA91B25A70700516BAF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7EB41AAA1B25A70700516BAF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7EB41AAC1B25A70700516BAF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7EB41AAD1B25A70700516BAF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7EB41AB01B25A70700516BAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7EB41AB21B25A70700516BAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7EB41AB51B25A70700516BAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		7EB41ABB1B25A70700516BAF /* VeriFoneSledTesterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VeriFoneSledTesterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EB41AC01B25A70700516BAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EB41AC11B25A70700516BAF /* VeriFoneSledTesterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VeriFoneSledTesterTests.m; sourceTree = "<group>"; };
+		7EB41ACC1B25BC4800516BAF /* 1.0.4.271.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.0.4.271.txt; sourceTree = "<group>"; };
+		7EB41ACD1B25BC4800516BAF /* VMF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VMF.framework; sourceTree = "<group>"; };
+		7EB41AD01B25C62800516BAF /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		7EB41AD21B25C63F00516BAF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		7EB41AD41B25C6B100516BAF /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		7EB41AD61B25C82300516BAF /* engagetst.tmw.com */ = {isa = PBXFileReference; lastKnownFileType = folder; path = engagetst.tmw.com; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7EB41A9F1B25A70700516BAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EB41AD51B25C6B100516BAF /* libz.1.2.5.dylib in Frameworks */,
+				7EB41AD31B25C63F00516BAF /* Security.framework in Frameworks */,
+				7EB41AD11B25C62800516BAF /* CoreBluetooth.framework in Frameworks */,
+				7EB41ACF1B25BC4800516BAF /* VMF.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EB41AB81B25A70700516BAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7EB41A991B25A70700516BAF = {
+			isa = PBXGroup;
+			children = (
+				7EB41AD41B25C6B100516BAF /* libz.1.2.5.dylib */,
+				7EB41AD21B25C63F00516BAF /* Security.framework */,
+				7EB41AD01B25C62800516BAF /* CoreBluetooth.framework */,
+				7EB41AA41B25A70700516BAF /* VeriFoneSledTester */,
+				7EB41ABE1B25A70700516BAF /* VeriFoneSledTesterTests */,
+				7EB41AA31B25A70700516BAF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7EB41AA31B25A70700516BAF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7EB41AA21B25A70700516BAF /* VeriFoneSledTester.app */,
+				7EB41ABB1B25A70700516BAF /* VeriFoneSledTesterTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7EB41AA41B25A70700516BAF /* VeriFoneSledTester */ = {
+			isa = PBXGroup;
+			children = (
+				7EB41AA91B25A70700516BAF /* AppDelegate.h */,
+				7EB41AAA1B25A70700516BAF /* AppDelegate.m */,
+				7EB41AAC1B25A70700516BAF /* ViewController.h */,
+				7EB41AAD1B25A70700516BAF /* ViewController.m */,
+				7EB41AAF1B25A70700516BAF /* Main.storyboard */,
+				7EB41AB21B25A70700516BAF /* Images.xcassets */,
+				7EB41AB41B25A70700516BAF /* LaunchScreen.xib */,
+				7EB41AD61B25C82300516BAF /* engagetst.tmw.com */,
+				7EB41ACB1B25BC4800516BAF /* VeriFone */,
+				7EB41AA51B25A70700516BAF /* Supporting Files */,
+			);
+			path = VeriFoneSledTester;
+			sourceTree = "<group>";
+		};
+		7EB41AA51B25A70700516BAF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7EB41AA61B25A70700516BAF /* Info.plist */,
+				7EB41AA71B25A70700516BAF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7EB41ABE1B25A70700516BAF /* VeriFoneSledTesterTests */ = {
+			isa = PBXGroup;
+			children = (
+				7EB41AC11B25A70700516BAF /* VeriFoneSledTesterTests.m */,
+				7EB41ABF1B25A70700516BAF /* Supporting Files */,
+			);
+			path = VeriFoneSledTesterTests;
+			sourceTree = "<group>";
+		};
+		7EB41ABF1B25A70700516BAF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7EB41AC01B25A70700516BAF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7EB41ACB1B25BC4800516BAF /* VeriFone */ = {
+			isa = PBXGroup;
+			children = (
+				7EB41ACC1B25BC4800516BAF /* 1.0.4.271.txt */,
+				7EB41ACD1B25BC4800516BAF /* VMF.framework */,
+			);
+			path = VeriFone;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7EB41AA11B25A70700516BAF /* VeriFoneSledTester */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EB41AC51B25A70700516BAF /* Build configuration list for PBXNativeTarget "VeriFoneSledTester" */;
+			buildPhases = (
+				7EB41A9E1B25A70700516BAF /* Sources */,
+				7EB41A9F1B25A70700516BAF /* Frameworks */,
+				7EB41AA01B25A70700516BAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VeriFoneSledTester;
+			productName = VeriFoneSledTester;
+			productReference = 7EB41AA21B25A70700516BAF /* VeriFoneSledTester.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7EB41ABA1B25A70700516BAF /* VeriFoneSledTesterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EB41AC81B25A70700516BAF /* Build configuration list for PBXNativeTarget "VeriFoneSledTesterTests" */;
+			buildPhases = (
+				7EB41AB71B25A70700516BAF /* Sources */,
+				7EB41AB81B25A70700516BAF /* Frameworks */,
+				7EB41AB91B25A70700516BAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7EB41ABD1B25A70700516BAF /* PBXTargetDependency */,
+			);
+			name = VeriFoneSledTesterTests;
+			productName = VeriFoneSledTesterTests;
+			productReference = 7EB41ABB1B25A70700516BAF /* VeriFoneSledTesterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7EB41A9A1B25A70700516BAF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Dmitry Zhurov";
+				TargetAttributes = {
+					7EB41AA11B25A70700516BAF = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					7EB41ABA1B25A70700516BAF = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = 7EB41AA11B25A70700516BAF;
+					};
+				};
+			};
+			buildConfigurationList = 7EB41A9D1B25A70700516BAF /* Build configuration list for PBXProject "VeriFoneSledTester" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7EB41A991B25A70700516BAF;
+			productRefGroup = 7EB41AA31B25A70700516BAF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7EB41AA11B25A70700516BAF /* VeriFoneSledTester */,
+				7EB41ABA1B25A70700516BAF /* VeriFoneSledTesterTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7EB41AA01B25A70700516BAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EB41ACE1B25BC4800516BAF /* 1.0.4.271.txt in Resources */,
+				7EB41AB11B25A70700516BAF /* Main.storyboard in Resources */,
+				7EB41AB61B25A70700516BAF /* LaunchScreen.xib in Resources */,
+				7EB41AD71B25C82300516BAF /* engagetst.tmw.com in Resources */,
+				7EB41AB31B25A70700516BAF /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EB41AB91B25A70700516BAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7EB41A9E1B25A70700516BAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EB41AAE1B25A70700516BAF /* ViewController.m in Sources */,
+				7EB41AAB1B25A70700516BAF /* AppDelegate.m in Sources */,
+				7EB41AA81B25A70700516BAF /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EB41AB71B25A70700516BAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EB41AC21B25A70700516BAF /* VeriFoneSledTesterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7EB41ABD1B25A70700516BAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7EB41AA11B25A70700516BAF /* VeriFoneSledTester */;
+			targetProxy = 7EB41ABC1B25A70700516BAF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7EB41AAF1B25A70700516BAF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7EB41AB01B25A70700516BAF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7EB41AB41B25A70700516BAF /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7EB41AB51B25A70700516BAF /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7EB41AC31B25A70700516BAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7EB41AC41B25A70700516BAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7EB41AC61B25A70700516BAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/VeriFoneSledTester/VeriFone",
+				);
+				INFOPLIST_FILE = VeriFoneSledTester/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7 i386";
+			};
+			name = Debug;
+		};
+		7EB41AC71B25A70700516BAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/VeriFoneSledTester/VeriFone",
+				);
+				INFOPLIST_FILE = VeriFoneSledTester/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7 i386";
+			};
+			name = Release;
+		};
+		7EB41AC91B25A70700516BAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = VeriFoneSledTesterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VeriFoneSledTester.app/VeriFoneSledTester";
+			};
+			name = Debug;
+		};
+		7EB41ACA1B25A70700516BAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = VeriFoneSledTesterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VeriFoneSledTester.app/VeriFoneSledTester";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7EB41A9D1B25A70700516BAF /* Build configuration list for PBXProject "VeriFoneSledTester" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EB41AC31B25A70700516BAF /* Debug */,
+				7EB41AC41B25A70700516BAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7EB41AC51B25A70700516BAF /* Build configuration list for PBXNativeTarget "VeriFoneSledTester" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EB41AC61B25A70700516BAF /* Debug */,
+				7EB41AC71B25A70700516BAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7EB41AC81B25A70700516BAF /* Build configuration list for PBXNativeTarget "VeriFoneSledTesterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EB41AC91B25A70700516BAF /* Debug */,
+				7EB41ACA1B25A70700516BAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7EB41A9A1B25A70700516BAF /* Project object */;
+}
